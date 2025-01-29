@@ -12,29 +12,13 @@
 
 
 def max_sequence(arr):
-    if arr == []:
-        return 0
-    subtractVal = 1
     currentHighestOutput = 0
-    for distance in range(1, len(arr)):
-        distanceVal = 0
-        for position in range (0, len(arr)):
-            outputNum = 0
-            currentPos = position
-            distanceVal = 0
-            currentArray = []
-            while distanceVal < distance + 1:
-                try:
-                    outputNum = outputNum + arr[currentPos]
-                    currentArray.append(arr[currentPos])
-                except IndexError:
-                    pass
-                distanceVal += 1
-                currentPos += 1
-            if outputNum > currentHighestOutput:
-                currentHighestOutput = outputNum
-    return currentHighestOutput
+    highestOutput = 0
+    for num in arr:
+        currentHighestOutput = max(num, currentHighestOutput + num)
+        # makes the current highest output the maximum between the current value, and the current value add the
+        # current highest output
+        highestOutput = max(highestOutput, currentHighestOutput)
+        # if the current output > highest output, sets highest output to current output
+    return highestOutput
 
-
-
-print(max_sequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
